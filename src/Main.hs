@@ -1,5 +1,6 @@
 module Main (main) where
 
+import Utils
 import Day01
 
 main :: IO ()

@@ -1,7 +1,9 @@
-module Day01 where
+module Day01
+  (listPairs, totalDist) where
 
 import Data.List (sort)
 
+listPairs :: [(Integer, Integer)]
 listPairs = [(3, 4),
              (4, 3),
              (2, 5),
