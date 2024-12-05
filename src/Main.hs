@@ -16,4 +16,5 @@ main = do
   putStrLn "Advent of Code 2024"
   d1ans <- totalDist <$> pairs
   print d1ans
-
+  d1ans' <- (simScore <$> pairs)
+  print d1ans'

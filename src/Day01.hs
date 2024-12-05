@@ -1,7 +1,9 @@
 module Day01
-  (listPairs, totalDist, parsePair, parsePairs) where
+  (listPairs, totalDist, parsePair, parsePairs, simScore, frequencyMap) where
 
-import Data.List (sort)
+import Data.List (foldl', sort)
+import qualified Data.HashMap.Strict as HashMap
+
 
 listPairs :: [(Integer, Integer)]
 listPairs = [(3, 4),
@@ -28,3 +30,20 @@ parsePair str =
 
 parsePairs :: [String] -> [(Integer, Integer)]
 parsePairs strs = map parsePair strs
+
+frequencyMap :: [Integer] -> HashMap.HashMap Integer Integer
+frequencyMap = foldl' (\acc x -> HashMap.insertWith (+) x 1 acc) HashMap.empty
+
+convertToInteger :: Maybe Integer -> Integer
+convertToInteger Nothing = 0
+convertToInteger (Just n) = n
+
+-- Similarity score sums up l0*f(l0) + l1*f(l1) + ... ln*f(ln)
+-- where l0 is the first number on the left and f(l0) is the frequency
+-- of occurrence of l0 in the right list.
+simScore :: [(Integer, Integer)] -> Integer
+simScore pairs =
+  sum [l0 * f(l0) | l0 <- map fst pairs]
+  where f x = convertToInteger $ HashMap.lookup x rfm
+          where rfm = frequencyMap (map snd pairs)
+  
