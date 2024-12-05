@@ -14,7 +14,6 @@ category:            Web
 build-type:          Simple
 extra-source-files:  README.md
                      CHANGELOG.md
-
 executable aoc2024
   hs-source-dirs:      src
   main-is:             Main.hs
