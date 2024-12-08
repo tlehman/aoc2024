@@ -4,7 +4,6 @@ module Day01
 import Data.List (foldl', sort)
 import qualified Data.HashMap.Strict as HashMap
 
-
 listPairs :: [(Integer, Integer)]
 listPairs = [(3, 4),
              (4, 3),
@@ -47,3 +46,4 @@ simScore pairs =
   where f x = convertToInteger $ HashMap.lookup x rfm
           where rfm = frequencyMap (map snd pairs)
   
+
