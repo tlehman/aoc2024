@@ -25,5 +25,8 @@ main = do
   print d1ans
   d1ans' <- simScore <$> pairs
   print d1ans'
+
   d2ans <- countSafeReports <$> reports
   print d2ans
+  d2ans' <- countSafeReportsWithDampener <$> reports
+  print d2ans'

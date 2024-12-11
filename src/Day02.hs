@@ -1,5 +1,10 @@
 module Day02
-  (isSafe, parseReportString, countSafeReports) where
+  (isSafe,
+   isSafeWithDampener,
+   parseReportString,
+   countSafeReports,
+   countSafeReportsWithDampener,
+   exampleReports) where
 
 import Data.List (words, sort)
 
@@ -45,3 +50,22 @@ countSafeReports reports =
 parseReportString :: String -> [Integer]
 parseReportString reportString =
   map read (words reportString)
+
+-- Part 2 has a modification that checks if a single
+-- unsafe level is the reason a report is marked unsafe.
+--   given a report with n items, we generate a list of n
+--   lists with (n-1) items, and then
+--      if any of them are safe, return true`
+
+removeNth :: Int -> [a] -> [a]
+removeNth _ [] = []
+removeNth 0 (_:xs) = xs
+removeNth n (x:xs) = x : removeNth (n-1) xs
+
+isSafeWithDampener :: [Integer] -> Bool
+isSafeWithDampener r =
+  any isSafe [removeNth i r | i <- [0..(length r)-1]]
+
+countSafeReportsWithDampener :: [[Integer]] -> Int
+countSafeReportsWithDampener reports =
+  length $ filter isSafeWithDampener reports
