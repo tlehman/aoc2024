@@ -14,6 +14,11 @@ day02 = readTSVFile "./data/day02.tsv"
 day03 :: IO [String]
 day03 = readTSVFile "./data/day03.txt"
 
+d3mulStrs :: IO [[String]]
+d3mulStrs = (fmap . fmap) extractMuls day03
+d3mulPairs :: IO [[(Integer,Integer)]]
+d3mulPairs = fmap (map (map (parseMul))) d3mulStrs
+
 -- need to (fmap . fmap) parsePair through
 -- both the IO and [] functors. 
 pairs :: IO [(Integer, Integer)]
@@ -35,4 +40,6 @@ main = do
   d2ans' <- countSafeReportsWithDampener <$> reports
   print d2ans'
 
-  print $ sum (map (mulPair . parseMul) muls)
+  -- I figured this out through trial & error at the GHCi REPL
+  d3ans <- sum <$> ((map sum) <$> ((map (map mulPair)) <$> (d3mulPairs)))
+  print d3ans
