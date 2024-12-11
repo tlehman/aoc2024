@@ -24,8 +24,10 @@ totalDist pairs = sum dists where
 
 parsePair :: String -> (Integer, Integer)
 parsePair str =
-  let [a, b] = map (\s -> read s :: Integer) (words str)
-  in (a, b)
+  let parsedNumbers = map (\s -> read s :: Integer) (words str)
+  in case parsedNumbers of
+    [a, b] -> (a, b)
+    _ -> (-1, -1)
 
 parsePairs :: [String] -> [(Integer, Integer)]
 parsePairs strs = map parsePair strs

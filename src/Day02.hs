@@ -6,7 +6,7 @@ module Day02
    countSafeReportsWithDampener,
    exampleReports) where
 
-import Data.List (words, sort)
+import Data.List (sort)
 
 exampleReports :: [[Integer]]
 exampleReports = [[7, 6, 4, 2, 1],

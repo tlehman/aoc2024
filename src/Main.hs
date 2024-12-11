@@ -3,12 +3,16 @@ module Main (main) where
 import TSVReader
 import Day01
 import Day02
+import Day03
 
 day01 :: IO [String]
 day01 = readTSVFile "./data/day01.tsv"
 
 day02 :: IO [String]
 day02 = readTSVFile "./data/day02.tsv"
+
+day03 :: IO [String]
+day03 = readTSVFile "./data/day03.txt"
 
 -- need to (fmap . fmap) parsePair through
 -- both the IO and [] functors. 
@@ -30,3 +34,5 @@ main = do
   print d2ans
   d2ans' <- countSafeReportsWithDampener <$> reports
   print d2ans'
+
+  print $ sum (map (mulPair . parseMul) muls)
